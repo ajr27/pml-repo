@@ -2,9 +2,8 @@
 title: "Predicting Quality of Movement with Human Activity Recognition Data"
 author: "Arcenis Rojas"
 date: "February 5, 2016"
-output: html_document
+output: pdf_document
 ---
-
 
 In this project I use data from the Human Activity Recognition (HAR) project to try to predict the manner in which the participants performed unilateral dumbell bicep curls. The five different ways in which they could have performed the movement are: exactly according to the specification (Class A), throwing the elbows to the front (Class B), lifting the dumbbell only halfway (Class C), lowering the dumbbell only halfway (Class D) and throwing the hips to the front (Class E)^[Velloso, E.; Bulling, A.; Gellersen, H.; Ugulino, W.; Fuks, H. Qualitative Activity Recognition of Weight Lifting Exercises. Proceedings of 4th International Conference in Cooperation with SIGCHI (Augmented Human '13) . Stuttgart, Germany: ACM SIGCHI, 2013.].
 
@@ -100,16 +99,7 @@ plot(fitRF, main = "Random Forest Error Rate by Number of Trees")
 Given the above model, I expect the out of sample error rate to be 0.7%.
 
 # Make Predictions on the pml-test data
-Finally, I'll predict the outcomes of the cases in the "pml-test" data using the random forest model developped above and save them for submission.
-```{r predict, echo = TRUE}
-final.pred <- predict(fitRF, validation, type = "class")
-
-dir.create("./predictions/", showWarnings = FALSE, recursive = TRUE)
-setwd("./predictions/")
-
-# Create prediction files
-invisible(sapply(seq_along(final.pred), function(x) {
-    write.table(final.pred[x], file = paste0("problem_id_", x, ".txt"),
-                quote = FALSE, row.names = FALSE, col.names = FALSE)
-}))
+Finally, I'll predict the outcomes of the cases in the "pml-test" data using the random forest model developped above. (The following code will not be evaluated so as not to reveal the predictions.)
+```{r predict, echo = TRUE, eval = FALSE}
+predict(fitRF, validation, type = "class")
 ```
